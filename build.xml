@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project name="Pokemons" default="run">
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+	<javac destdir="build/classes" includeantruntime="false">
+		<src path="src/MyMoves/Physical"/>
+		<classpath>
+			<pathelement path="Pokemon.jar"/>
+		</classpath>
+	</javac>
+	<javac destdir="build/classes" includeantruntime="false">
+                <src path="src/MyMoves/Spesial"/>
+                <classpath>
+                        <pathelement path="Pokemon.jar"/>
+                </classpath>
+	</javac>
+	<javac destdir="build/classes" includeantruntime="false">
+                <src path="src/MyMoves/Status"/>
+                <classpath>
+                        <pathelement path="Pokemon.jar"/>
+                </classpath>
+	</javac>
+	<javac destdir="build/classes" includeantruntime="false">
+                <src path="src/MyPokemons"/>
+                <classpath>
+                        <pathelement path="Pokemon.jar"/>
+                </classpath>
+	</javac>
+	<javac destdir="build/classes" includeantruntime="false">
+                <src path="src/"/>
+                <classpath>
+                        <pathelement path="Pokemon.jar"/>
+                </classpath>
+        </javac>
+	</target>
+
+	<target name="package" depends="compile">
+		<jar destfile="build/${ant.project.name}.jar" basedir="build/classes">
+			<zipgroupfileset dir="." includes="Pokemon.jar" />
+        		<manifest>
+            			<attribute name="Main-Class" value="Main"/>
+        		</manifest>
+    		</jar>
+	</target>
+</project>
+
