@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <project name="Pokemons" default="run">
-    <target name="compile">
+    <target name="clean">
+         <delete dir="build"/>
+    </target>
+    <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
 	<javac destdir="build/classes" includeantruntime="false">
 		<src path="src/MyMoves/Physical"/>
@@ -35,12 +38,16 @@
 	</target>
 
 	<target name="package" depends="compile">
-		<jar destfile="build/${ant.project.name}.jar" basedir="build/classes">
+		<jar destfile="${ant.project.name}.jar" basedir="build/classes">
 			<zipgroupfileset dir="." includes="Pokemon.jar" />
         		<manifest>
             			<attribute name="Main-Class" value="Main"/>
         		</manifest>
-    		</jar>
+		</jar>
+		<antcall target="clean" />
+	</target>
+	<target name="clean_after" depends="package">
+		<delete dir="./build" />
 	</target>
 </project>
 
